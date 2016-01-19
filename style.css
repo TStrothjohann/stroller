@@ -11,3 +11,38 @@ Text Domain: stroller
 Tags:
 
 */
+
+
+
+.hero #cafe {
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    font: 0/0 serif;
+    text-shadow: none;
+    color: transparent;
+    background-size: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.hero #cafe .inner {
+    padding-top: 63.35%; /* height/width of image */
+    display: block;
+    height: 0;
+}
+
+default screen, non-retina */
+.hero #cafe { 
+    background-image: url("images/P1013394_970.png");
+}
+
+/*@media only screen and (max-width: 320px) {
+    /* Small screen, non-retina */
+    .hero #cafe { background-image: url("images/P1013394_290.png"); }
+}
+
+
+@media only screen and (min-width: 321px) and (max-width: 538px) {
+    /* Medium screen, non-retina */
+    .hero #cafe { background-image: url("images/P1013394_538.png"); }
+}

@@ -23,32 +23,4 @@
 
 <body <?php body_class(); ?> >
 <div id="page" class="container">
-
-	<header  class="row" role="banner">
-
-		<div class="col-xs-12">
-			<?php if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php endif; ?>
-			<p class="site-description"><?php bloginfo( 'description' ); ?></p>
-		</div>
-
-		<nav class="navbar navbar-dark bg-primary col-xs-12" role="navigation">
-		  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#stroller-menu">
-		    &#9776;
-		  </button>
-		  <a class="navbar-brand" href="#">stroller</a>
-		  <div id="stroller-menu">
-		  	<?php wp_nav_menu( array( 
-		  														'theme_location' => 'primary', 
-		  														'menu_id' => 'primary-menu',
-		  														'container_class' => 'nav navbar-nav' 
-
-		  													) ); ?>
-		  </div>
-		</nav>
-	</header>
-
 	<div id="content" class="site-content">

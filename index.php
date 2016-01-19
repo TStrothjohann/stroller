@@ -13,41 +13,50 @@
  */
 
 get_header(); ?>
+ 
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<div class="col-xs-12">
+  <h3 class="masthead-brand"><?php bloginfo( 'name' ); ?></h3>
+  <?php 
+      $menu_name = 'primary';
+		  if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+				$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+				$menu_items = wp_get_nav_menu_items($menu->term_id);
+				$menu_list = '<nav class="nav nav-masthead">';
 
-		<?php 
-		$my_query = new WP_Query( 'category_name=featured&posts_per_page=1' ); 
-		if ( have_posts() ) : 
-		
-			while ( $my_query->have_posts() ) : $my_query->the_post(); 
-					$do_not_duplicate = $post->ID; ?>
+				foreach ( (array) $menu_items as $key => $menu_item ) {
+				    $title = $menu_item->title;
+				    $url = $menu_item->url;
+				    $menu_list .= '<a class="nav-link" href="' . $url . '">' . $title . '</a>';
+				}
+				$menu_list .= '</nav>';
+		  } else {
+				$menu_list = '<ul><li>Menu "' . $menu_name . '" not defined.</li></ul>';
+		  }
 
-						<div class="jumbotron col-xs-12 featured-area">
-						  <h1 class="display-3"><?php the_title(); ?></h1>
-						  <p class="lead"><?php the_excerpt(); ?></p>
-						  <hr class="m-y-md">
-						  <p class="lead">
-						    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-						  </p>
-						</div>
-			<?php 
-			endwhile; 
-			if ( have_posts() ) : while ( have_posts() ) : the_post(); 
-				if ( $post->ID == $do_not_duplicate ) continue;
-						get_template_part( 'template-parts/content', get_post_format() );
-					
-			endwhile; endif; 
+		  echo $menu_list;
+  ?>
+</div>
+<div class="row bg-img">
 
-				 the_posts_navigation(); 
+<div class="hero">
+    <span id="cafe" role="img" aria-label="Coffee and croissant.">
+            <div class="col-lg-8 col-lg-offset-2">
+    <h1 class="text-xs-center" ><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+    <p class="lead text-xs-center"><?php bloginfo( 'description' ); ?></p>
+    <p class="lead text-xs-center">
+      <a href="#" class="btn btn-lg btn-secondary">Zur Anmeldung</a>
+    </p>
+  </div>
+        <span class="inner">
+        </span>
 
-		 else : 
-		 	get_template_part( 'template-parts/content', 'none' );
-		 endif; ?>
+    </span>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
+</div>
 
-<?php get_sidebar(); ?>
+
+</div>
+
+
 <?php get_footer(); ?>

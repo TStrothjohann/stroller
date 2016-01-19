@@ -71,11 +71,6 @@ function stroller_setup() {
 		'link',
 	) );
 
-	// Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'stroller_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) );
 }
 endif; // stroller_setup
 add_action( 'after_setup_theme', 'stroller_setup' );
@@ -114,8 +109,8 @@ add_action( 'widgets_init', 'stroller_widgets_init' );
  * Enqueue scripts and styles.
  */
 function stroller_scripts() {
-	wp_enqueue_style( 'stroller-style', get_stylesheet_uri() );
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );
+	wp_enqueue_style( 'stroller-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.js', array( 'jquery' ), '20151106', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

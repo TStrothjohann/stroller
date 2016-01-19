@@ -13,7 +13,7 @@
 
 	</div><!-- #content -->
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
+	<footer id="colophon" class="site-footer col-xs-12" role="contentinfo">
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'stroller' ) ); ?>"><?php printf( esc_html__( 'Proudly powered by %s', 'stroller' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>
