@@ -12,11 +12,28 @@
  * @package stroller
  */
 
-get_header(); ?>
- 
+get_header(); 
+
+if ( ! is_user_logged_in() ) { ?>
+  <div class="row m-t m-b">
+    <div class="col-lg-4 col-lg-offset-4">
+
+    <?php $args = array(
+        'redirect' => home_url(), 
+        'form_id' => 'loginform-index',
+        'label_username' => __( 'Anmeldename aus der Einladung' ),
+        'label_password' => __( 'Passwort aus der Einladung' ),
+        'label_log_in' => __( 'Anmelden' ),
+        'remember' => false
+    );
+    wp_login_form( $args );
+    ?>
+    </div>
+  </div> 
+<?php } else { ?>
 
 <div class="col-xs-12">
-  <h3 class="masthead-brand"><?php bloginfo( 'name' ); ?></h3>
+  
   <?php 
       $menu_name = 'primary';
 		  if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
@@ -37,26 +54,31 @@ get_header(); ?>
 		  echo $menu_list;
   ?>
 </div>
-<div class="row bg-img">
 
-<div class="hero">
-    <span id="cafe" role="img" aria-label="Coffee and croissant.">
-            <div class="col-lg-8 col-lg-offset-2">
-    <h1 class="text-xs-center" ><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-    <p class="lead text-xs-center"><?php bloginfo( 'description' ); ?></p>
-    <p class="lead text-xs-center">
-      <a href="#" class="btn btn-lg btn-secondary">Zur Anmeldung</a>
-    </p>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+    <?php 
+    $my_query = new WP_Query( 'name=wir-wollen-heiraten' ); 
+    if ( have_posts() ) : 
+    
+      while ( $my_query->have_posts() ) : $my_query->the_post();  ?>
+
+          <div class="jumbotron col-xs-12 featured-area">
+            <h1 class="display-1"><?php the_title(); ?></h1>
+            <p class="lead"><?php the_content(); ?></p>
+            <hr class="m-y-md">
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-success text-xs-left">Ja</a>
+              <a href="#" class="btn btn-lg btn-danger  text-xs-right">Nein</a>
+            </p>
+          </div>
+      <?php 
+      endwhile; 
+    endif; ?>
+
+
   </div>
-        <span class="inner">
-        </span>
-
-    </span>
-
 </div>
-
-
-</div>
-
+<?php } ?>
 
 <?php get_footer(); ?>

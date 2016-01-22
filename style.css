@@ -14,35 +14,64 @@ Tags:
 
 
 
-.hero #cafe {
-    width: 100%;
-    display: inline-block;
-    vertical-align: middle;
-    font: 0/0 serif;
-    text-shadow: none;
-    color: transparent;
-    background-size: 100%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+#logo .and {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-style: normal;
+    color: #555555;
+    font-size: 75px;
+    opacity: 1;
+    -webkit-transition: opacity 0.24s ease-in-out;
+    -moz-transition: opacity 0.24s ease-in-out;
+    transition: opacity 0.24s ease-in-out;
 }
-.hero #cafe .inner {
-    padding-top: 63.35%; /* height/width of image */
+
+
+#logo a:hover {
+    text-decoration: none !important;
+}
+
+h3.name {
+    font-family: Montserrat;
+    display: inline;
+}
+
+#logo a {
+    color: #333333;
+}
+
+
+/* Login Form on front page*/
+
+form#loginform-index input {
     display: block;
-    height: 0;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: .0625rem solid #ccc;
+    border-radius: .25rem;
+
 }
 
-default screen, non-retina */
-.hero #cafe { 
-    background-image: url("images/P1013394_970.png");
-}
 
-/*@media only screen and (max-width: 320px) {
-    /* Small screen, non-retina */
-    .hero #cafe { background-image: url("images/P1013394_290.png"); }
+form#loginform-index p {
+        margin-bottom: 15px;
 }
+body.login div#login form#loginform p label {}
+body.login div#login form#loginform input {
 
-
-@media only screen and (min-width: 321px) and (max-width: 538px) {
-    /* Medium screen, non-retina */
-    .hero #cafe { background-image: url("images/P1013394_538.png"); }
 }
+body.login div#login form#loginform input#user_login {}
+body.login div#login form#loginform input#user_pass {}
+body.login div#login form#loginform p.forgetmenot {}
+body.login div#login form#loginform p.forgetmenot input#rememberme {}
+body.login div#login form#loginform p.submit {}
+body.login div#login form#loginform p.submit input#wp-submit {}
+body.login div#login p#nav {}
+body.login div#login p#nav a {}
+body.login div#login p#backtoblog {}
+body.login div#login p#backtoblog a {}

@@ -17,10 +17,22 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?> >
-<div id="page" class="container">
+<div id="page" class="container-fluid">
+  <div class="row">
+    <div id="logo" class="text-xs-center">
+      <a href="<?php echo get_home_url(); ?>">
+        <h3 class="name left">Nadja</h3>
+        <span class="and">&amp;</span>
+        <h3 class="name right">Thomas</h3>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+      <img width="100%"src="<?php echo get_template_directory_uri() . '/images/150507_nadja-thomas.jpg'; ?>">
+  </div>
 	<div id="content" class="site-content">
