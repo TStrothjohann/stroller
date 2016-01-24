@@ -75,17 +75,6 @@ function stroller_setup() {
 endif; // stroller_setup
 add_action( 'after_setup_theme', 'stroller_setup' );
 
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function stroller_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'stroller_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'stroller_content_width', 0 );
 
 /**
  * Register widget area.
@@ -112,6 +101,14 @@ function stroller_scripts() {
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );
 	wp_enqueue_style( 'stroller-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.js', array( 'jquery' ), '20151106', true );
+	
+	// custom jquery
+	wp_register_script( 'custom_js', get_template_directory_uri() . '/js/jquery.custom.js', array( 'jquery' ), '1.0', TRUE );
+	wp_enqueue_script( 'custom_js' );
+	 
+	// validation
+	wp_register_script( 'validation', 'http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'validation' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -119,20 +116,6 @@ function stroller_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'stroller_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
- * Custom template tags for this theme.
- */
-require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Custom functions that act independently of the theme templates.
- */
-require get_template_directory() . '/inc/extras.php';
 
 /**
  * Customizer additions.
@@ -143,3 +126,110 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
+// Register Custom Post Type
+function register_anmeldung() {
+
+	$labels = array(
+		'name'                  => _x( 'Anmeldungen', 'Post Type General Name', 'text_domain' ),
+		'singular_name'         => _x( 'Anmeldung', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'             => __( 'Anmeldung', 'text_domain' ),
+		'name_admin_bar'        => __( 'Anmeldungen', 'text_domain' ),
+		'archives'              => __( 'Anmeldungen', 'text_domain' ),
+		'parent_item_colon'     => __( 'Parent Item:', 'text_domain' ),
+		'all_items'             => __( 'All Items', 'text_domain' ),
+		'add_new_item'          => __( 'Anmeldung anlegen', 'text_domain' ),
+		'add_new'               => __( 'Add New', 'text_domain' ),
+		'new_item'              => __( 'New Item', 'text_domain' ),
+		'edit_item'             => __( 'Edit Item', 'text_domain' ),
+		'update_item'           => __( 'Update Item', 'text_domain' ),
+		'view_item'             => __( 'View Item', 'text_domain' ),
+		'search_items'          => __( 'Search Item', 'text_domain' ),
+		'not_found'             => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+		'featured_image'        => __( 'Featured Image', 'text_domain' ),
+		'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+		'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+		'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+		'insert_into_item'      => __( 'Insert into item', 'text_domain' ),
+		'uploaded_to_this_item' => __( 'Uploaded to this item', 'text_domain' ),
+		'items_list'            => __( 'Items list', 'text_domain' ),
+		'items_list_navigation' => __( 'Items list navigation', 'text_domain' ),
+		'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
+	);
+	$args = array(
+		'label'                 => __( 'Anmeldung', 'text_domain' ),
+		'description'           => __( 'Anmeldungen für die Hochzeit.', 'text_domain' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'author', 'custom-fields', ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+		'menu_position'         => 5,
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => false,
+		'can_export'            => true,
+		'has_archive'           => false,		
+		'exclude_from_search'   => true,
+		'publicly_queryable'    => false,
+		'capability_type'       => 'post',
+	);
+	register_post_type( 'anmeldung', $args );
+
+}
+add_action( 'init', 'register_anmeldung', 0 );
+
+//Add Fields for Angehörige
+add_action( 'show_user_profile', 'my_show_extra_profile_fields' );
+add_action( 'edit_user_profile', 'my_show_extra_profile_fields' );
+
+function my_show_extra_profile_fields( $user ) { ?>
+
+	<h3>Angehörige</h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="angehoeriger1">1. Angehöriger</label></th>
+			<td>
+				<input type="text" name="angehoeriger1" id="angehoeriger1" value="<?php echo esc_attr( get_the_author_meta( 'angehoeriger1', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Erste/r Angehörige/r.</span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="angehoeriger2">2. Angehöriger</label></th>
+			<td>
+				<input type="text" name="angehoeriger2" id="angehoeriger1" value="<?php echo esc_attr( get_the_author_meta( 'angehoeriger2', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Zweite/r Angehörige/r.</span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="angehoeriger3">3. Angehöriger</label></th>
+			<td>
+				<input type="text" name="angehoeriger3" id="angehoeriger3" value="<?php echo esc_attr( get_the_author_meta( 'angehoeriger3', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Dritte/r Angehörige/r.</span>
+			</td>
+		</tr>
+		<tr>
+			<th><label for="angehoeriger4">4. Angehöriger</label></th>
+			<td>
+				<input type="text" name="angehoeriger4" id="angehoeriger4" value="<?php echo esc_attr( get_the_author_meta( 'angehoeriger4', $user->ID ) ); ?>" class="regular-text" /><br />
+				<span class="description">Vierte/r Angehörige/r.</span>
+			</td>
+		</tr>
+	</table>
+<?php }
+
+add_action( 'personal_options_update', 'my_save_extra_profile_fields' );
+add_action( 'edit_user_profile_update', 'my_save_extra_profile_fields' );
+
+function my_save_extra_profile_fields( $user_id ) {
+
+	if ( !current_user_can( 'edit_user', $user_id ) )
+		return false;
+
+	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. */
+	update_usermeta( $user_id, 'angehoeriger1', $_POST['angehoeriger1'] );
+	update_usermeta( $user_id, 'angehoeriger2', $_POST['angehoeriger2'] );
+	update_usermeta( $user_id, 'angehoeriger3', $_POST['angehoeriger3'] );
+	update_usermeta( $user_id, 'angehoeriger4', $_POST['angehoeriger4'] );
+}

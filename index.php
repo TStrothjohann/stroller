@@ -12,6 +12,34 @@
  * @package stroller
  */
 
+// Form Validation
+ 
+$postTitleError = '';
+ 
+if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_verify_nonce( $_POST['post_nonce_field'], 'post_nonce' ) ) {
+ 
+    if ( trim( $_POST['postTitle'] ) === '' ) {
+        $postTitleError = 'Please enter a title.';
+        $hasError = true;
+    }
+ 
+    $post_information = array(
+        'post_title' => 'anmeldung' . '-' . wp_get_current_user()->user_login,
+        //'post_title' => wp_strip_all_tags( $_POST['postTitle'] ),
+        'post_content' => $_POST['postContent'],
+        'post_type' => 'anmeldung',
+        'post_status' => 'pending'
+    );
+
+  $post_id = wp_insert_post( $post_information );
+
+}
+ 
+
+
+// End experiment
+
+
 get_header(); 
 
 if ( ! is_user_logged_in() ) { ?>
@@ -78,6 +106,20 @@ if ( ! is_user_logged_in() ) { ?>
 
 
   </div>
+
+</div>
+
+<div>
+  <?php 
+  if ( $post_id ) {
+    echo '<p>Danke für die Anmeldung</p>';
+  }else{
+    get_template_part( 'create', 'anmeldung' ); 
+  }
+  ?>
+</div>
+
+
 </div>
 <?php } ?>
 
