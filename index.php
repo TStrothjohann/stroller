@@ -12,6 +12,7 @@
  * @package stroller
  */
 
+
 // Form Validation
  
 $postTitleError = '';
@@ -22,16 +23,19 @@ if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_v
         $postTitleError = 'Please enter a title.';
         $hasError = true;
     }
- 
+    
     $post_information = array(
-        'post_title' => 'anmeldung' . '-' . wp_get_current_user()->user_login,
-        //'post_title' => wp_strip_all_tags( $_POST['postTitle'] ),
+        'post_title' => 'anmeldung' . '-' . wp_get_current_user()->user_firstname . '-' . wp_get_current_user()->user_lastname,
         'post_content' => $_POST['postContent'],
         'post_type' => 'anmeldung',
         'post_status' => 'pending'
     );
 
-  $post_id = wp_insert_post( $post_information );
+  $anmeldung_id = wp_insert_post( $post_information );
+
+  add_post_meta($anmeldung_id, "anmeldung_adresse", wp_strip_all_tags($_POST['anmeldungAdresse']) );
+  add_post_meta($anmeldung_id, "anmeldung_hotel", wp_strip_all_tags($_POST['anmeldungHotel']) );
+  $post_id = $anmeldung_id;
 
 }
  
