@@ -3,9 +3,9 @@
         <label for="postTitle"><?php _e('Post Title:', 'framework') ?></label> 
         <input type="text" name="postTitle" id="postTitle" class="required form-control" placeholder="Post Title" value="<?php if ( isset( $_POST['postTitle'] ) ) echo $_POST['postTitle']; ?>"/>
     </fieldset>
-    <fieldset>
+    <fieldset class="form-group">
         <label for="anmeldungAdresse"><?php _e('Adresse:', 'stroller') ?></label>
-        <input type="text" name="anmeldungAdresse" id="anmeldungAdresse" class="form-control" placeholder="Bötzowstraße 38, 10407 Berlin">
+        <input type="text" name="anmeldungAdresse" id="anmeldungAdresse" class="form-control" placeholder="z.B. Bötzowstraße 38, 10407 Berlin">
     </fieldset>
     <fieldset class="form-group">
       <label for="anmeldungHotel">Hast Du schon eine Hotelreservierung?</label>
@@ -18,11 +18,65 @@
       </select>
       <small class="text-muted">Wir haben unterschiedliche Zimmer in naheliegenden Hotels reserviert - <a href="/hotels">Infos zu den Hotels</a></small>
     </fieldset>
+
+    <?php
+    
+    $users_meta = get_user_meta(wp_get_current_user()->ID); 
+
+    if ($users_meta['angehoeriger1'] !== '') { ?>
+      <div class="form-group row">
+        <label class="col-sm-3"><?php echo $users_meta['angehoeriger1'][0]; ?></label>
+        <div class="col-sm-9">
+          <div class="checkbox">
+            <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger1'][0]; ?>">
+          </div>
+        </div>
+      </div>
+
+    <?php
+      
+      if($users_meta['angehoeriger2'][0] !== '' ){ ?>
+        <div class="form-group row">
+          <label class="col-sm-3"><?php echo $users_meta['angehoeriger2'][0]; ?></label>
+          <div class="col-sm-9">
+            <div class="checkbox">
+              <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger2'][0]; ?>">
+            </div>
+          </div>
+        </div>
+      <?php
+      }
+
+      if($users_meta['angehoeriger3'][0] !== ''){ ?>
+        <div class="form-group row">
+          <label class="col-sm-3"><?php echo $users_meta['angehoeriger3'][0]; ?></label>
+          <div class="col-sm-9">
+            <div class="checkbox">
+              <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger3'][0]; ?>">
+            </div>
+          </div>
+        </div>
+      <?php
+      }
+
+      if($users_meta['angehoeriger4'][0] !== ''){ ?>
+        <div class="form-group row">
+          <label class="col-sm-3"><?php echo $users_meta['angehoeriger4'][0]; ?></label>
+          <div class="col-sm-9">
+            <div class="checkbox">
+              <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger4'][0]; ?>">
+            </div>
+          </div>
+        </div>
+      <?php
+      }
+    }
+    ?>
  
     <fieldset class="form-group">
         <label for="postContent"><?php _e('Post Content:', 'framework') ?></label>
  
-        <textarea name="postContent" id="postContent" rows="8" cols="30" class="required form-control">
+        <textarea name="postContent" id="postContent" class="required form-control">
         <?php 
             if ( isset( $_POST['postContent'] ) ) { 
                 if ( function_exists( 'stripslashes' ) ) { 

@@ -35,6 +35,10 @@ if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_v
 
   add_post_meta($anmeldung_id, "anmeldung_adresse", wp_strip_all_tags($_POST['anmeldungAdresse']) );
   add_post_meta($anmeldung_id, "anmeldung_hotel", wp_strip_all_tags($_POST['anmeldungHotel']) );
+  
+  $angehoerige = implode(', ', $_POST['angehoerige']);
+  update_post_meta($anmeldung_id, "angehoerige",  $angehoerige );
+
   $post_id = $anmeldung_id;
 
 }
