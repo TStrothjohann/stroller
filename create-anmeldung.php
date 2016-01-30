@@ -1,3 +1,4 @@
+<h3 id="hello" class="col-xs-12 text-xs-center" data-name="<?php echo wp_get_current_user()->user_login; ?>">Hallo <?php echo wp_get_current_user()->user_firstname; ?></h3>
 <form action="" id="createPostForm" method="POST" class="col-lg-8 col-lg-offset-2">
     <fieldset class="form-group">
         <label for="postTitle"><?php _e('Post Title:', 'framework') ?></label> 
@@ -92,6 +93,16 @@
     <fieldset>
         <input type="hidden" name="submitted" id="submitted" value="true" />
         <?php wp_nonce_field( 'post_nonce', 'post_nonce_field' ); ?>
-        <button type="submit" class="btn"><?php _e('Add Post', 'framework') ?></button>
+        <button type="submit" id="submitButton" class="btn"><?php _e('Add Post', 'framework') ?></button>
     </fieldset>
 </form>
+<script type="text/javascript">
+  jQuery('#submitButton').on('click', function(){
+    var hochzeitEvent = {};
+
+    hochzeitEvent.user = jQuery('h3#hello').data('name');
+    hochzeitEvent.action = 'anmeldung';
+
+    trackHochzeitEvent(hochzeitEvent);
+  })
+</script>
