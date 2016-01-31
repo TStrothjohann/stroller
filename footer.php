@@ -11,7 +11,6 @@
 
 ?>
 
-	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer col-xs-12" role="contentinfo">
 	</footer><!-- #colophon -->

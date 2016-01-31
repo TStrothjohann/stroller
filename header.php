@@ -21,7 +21,7 @@
 <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?> >
+<body <?php body_class(); ?> data-spy="scroll" data-target="#mainnav" data-offset="0" >
 <!-- Tracking -->
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -64,7 +64,6 @@
       </a>
     </div>
   </div>
-  <div class="row">
+  <div class="row" id="top-img">
       <img width="100%"src="<?php echo get_template_directory_uri() . '/images/150507_nadja-thomas.jpg'; ?>">
   </div>
-	<div id="content" class="site-content">

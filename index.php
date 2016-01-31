@@ -73,22 +73,20 @@ if ( ! is_user_logged_in() ) { ?>
     </div>
   </div> 
 <?php } else { ?>
-
-<div class="col-xs-12">
-  
+<div class="row m-b">
   <?php 
       $menu_name = 'primary';
 		  if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
 				$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
 				$menu_items = wp_get_nav_menu_items($menu->term_id);
-				$menu_list = '<nav class="nav nav-masthead">';
+				$menu_list = '<nav id="mainnav" class="navbar navbar-full nav-inline" role="navigation"><div class="container"><ul>';
 
 				foreach ( (array) $menu_items as $key => $menu_item ) {
 				    $title = $menu_item->title;
 				    $url = $menu_item->url;
-				    $menu_list .= '<a class="nav-link" href="' . $url . '">' . $title . '</a>';
+				    $menu_list .= '<li><a class="nav-link" href="' . $url . '">' . $title . '</a></li>';
 				}
-				$menu_list .= '</nav>';
+				$menu_list .= '</ul></div></nav>';
 		  } else {
 				$menu_list = '<ul><li>Menu "' . $menu_name . '" not defined.</li></ul>';
 		  }
@@ -97,7 +95,8 @@ if ( ! is_user_logged_in() ) { ?>
   ?>
 </div>
 
-<div class="row">
+
+<div class="row" id="wann-wo">
   <div class="col-lg-8 col-lg-offset-2">
     <?php 
     $my_query = new WP_Query( 'name=wir-wollen-heiraten' ); 
@@ -123,7 +122,7 @@ if ( ! is_user_logged_in() ) { ?>
 
 </div>
 
-<div>
+<div id="anmeldung">
   <?php 
   if ( $post_id ) {
     echo '<p>Danke für die Anmeldung</p>';

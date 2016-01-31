@@ -68,18 +68,12 @@
     ?>
  
     <fieldset class="form-group">
-        <label for="postContent"><?php _e('Post Content:', 'framework') ?></label>
+        <label for="postContent"><?php _e('Willst Du uns sonst noch etwas mitteilen? Hast Du Fragen?', 'stroller') ?></label>
  
-        <textarea name="postContent" id="postContent" class="required form-control">
+        <textarea name="postContent" id="postContent" class="required form-control" value="
         <?php 
-            if ( isset( $_POST['postContent'] ) ) { 
-                if ( function_exists( 'stripslashes' ) ) { 
-                    echo stripslashes( $_POST['postContent'] ); 
-                } else { 
-                    echo $_POST['postContent']; 
-                } 
-            }
-        ?>
+            if ( isset( $_POST['postContent'] ) ) { echo $_POST['postContent']; } 
+        ?>">
         </textarea>
     </fieldset>
  
