@@ -15,15 +15,8 @@
 
 // Form Validation
  
-$postTitleError = '';
- 
 if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_verify_nonce( $_POST['post_nonce_field'], 'post_nonce' ) ) {
- 
-    if ( trim( $_POST['postTitle'] ) === '' ) {
-        $postTitleError = 'Please enter a title.';
-        $hasError = true;
-    }
-    
+
     $post_information = array(
         'post_title' => 'anmeldung' . '-' . wp_get_current_user()->user_firstname . '-' . wp_get_current_user()->user_lastname,
         'post_content' => $_POST['postContent'],
@@ -32,11 +25,24 @@ if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_v
     );
 
   $anmeldung_id = wp_insert_post( $post_information );
+  $anmeldung_user_id = wp_get_current_user()->ID;
+  
+  // save anmeldung into user-profile
+  
+    if ( current_user_can( 'edit_user', $anmeldung_user_id ) ){
+      update_usermeta( $anmeldung_user_id, 'anmeldung_id', $anmeldung_id );
+    }
+  
 
   add_post_meta($anmeldung_id, "anmeldung_adresse", wp_strip_all_tags($_POST['anmeldungAdresse']) );
   add_post_meta($anmeldung_id, "anmeldung_hotel", wp_strip_all_tags($_POST['anmeldungHotel']) );
   
-  $angehoerige = implode(', ', $_POST['angehoerige']);
+  if ( is_array($_POST['angehoerige']) ){
+    $angehoerige = implode(', ', $_POST['angehoerige']);
+  }else{
+    $angehoerige = $_POST['angehoerige'];
+  }
+  
   update_post_meta($anmeldung_id, "angehoerige",  $angehoerige );
 
   $post_id = $anmeldung_id;

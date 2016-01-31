@@ -217,6 +217,25 @@ function my_show_extra_profile_fields( $user ) { ?>
 			</td>
 		</tr>
 	</table>
+	<h3>Anmeldung</h3>
+	<table class="form-table">
+		<tr>
+			<th><label for="anmeldung_id">ID der Anmeldung:</label></th>
+			<td>
+				<span name="anmeldung_id" id="anmeldung_id">
+					<?php 
+					$anmeldung_id = get_the_author_meta( 'anmeldung_id', $user->ID );
+					if ( $anmeldung_id ) {
+						
+						edit_post_link( $anmeldung_id, '', '', $anmeldung_id );
+					}else{
+						echo 'noch nicht angemeldet';
+					}
+					?>
+				</span>
+			</td>
+		</tr>
+	</table>
 <?php }
 
 add_action( 'personal_options_update', 'save_extra_profile_fields' );
@@ -227,9 +246,19 @@ function save_extra_profile_fields( $user_id ) {
 	if ( !current_user_can( 'edit_user', $user_id ) )
 		return false;
 
-	/* Copy and paste this line for additional fields. Make sure to change 'twitter' to the field ID. */
 	update_usermeta( $user_id, 'angehoeriger1', $_POST['angehoeriger1'] );
 	update_usermeta( $user_id, 'angehoeriger2', $_POST['angehoeriger2'] );
 	update_usermeta( $user_id, 'angehoeriger3', $_POST['angehoeriger3'] );
 	update_usermeta( $user_id, 'angehoeriger4', $_POST['angehoeriger4'] );
+}
+
+// Hide admin bar
+add_filter('show_admin_bar', '__return_false');
+
+add_action( 'init', 'blockusers_init' );
+function blockusers_init() {
+	if ( is_admin() && ! current_user_can( 'administrator' ) && !( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
+		wp_redirect( home_url() );
+		exit;
+	}
 }

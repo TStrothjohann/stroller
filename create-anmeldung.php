@@ -1,9 +1,5 @@
 <h3 id="hello" class="col-xs-12 text-xs-center" data-name="<?php echo wp_get_current_user()->user_login; ?>">Hallo <?php echo wp_get_current_user()->user_firstname; ?></h3>
-<form action="" id="createPostForm" method="POST" class="col-lg-8 col-lg-offset-2">
-    <fieldset class="form-group">
-        <label for="postTitle"><?php _e('Post Title:', 'framework') ?></label> 
-        <input type="text" name="postTitle" id="postTitle" class="required form-control" placeholder="Post Title" value="<?php if ( isset( $_POST['postTitle'] ) ) echo $_POST['postTitle']; ?>"/>
-    </fieldset>
+<form action="" id="createPostForm" method="POST" class="col-xs-12 col-lg-8 col-lg-offset-2">
     <fieldset class="form-group">
         <label for="anmeldungAdresse"><?php _e('Adresse:', 'stroller') ?></label>
         <input type="text" name="anmeldungAdresse" id="anmeldungAdresse" class="form-control" placeholder="z.B. Bötzowstraße 38, 10407 Berlin">
@@ -24,53 +20,50 @@
     
     $users_meta = get_user_meta(wp_get_current_user()->ID); 
 
-    if ($users_meta['angehoeriger1'] !== '') { ?>
-      <div class="form-group row">
-        <label class="col-sm-3"><?php echo $users_meta['angehoeriger1'][0]; ?></label>
-        <div class="col-sm-9">
-          <div class="checkbox">
-            <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger1'][0]; ?>">
-          </div>
-        </div>
+    if ($users_meta['angehoeriger1']) { ?>
+      <label for="checkbox-container">Bringst du deine Lieben mit?</label>
+      <div class="form-group" id="checkbox-container">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger1'][0]; ?>">
+          <?php echo $users_meta['angehoeriger1'][0]; ?>
+        </label>
       </div>
 
     <?php
       
-      if($users_meta['angehoeriger2'][0] !== '' ){ ?>
-        <div class="form-group row">
-          <label class="col-sm-3"><?php echo $users_meta['angehoeriger2'][0]; ?></label>
-          <div class="col-sm-9">
-            <div class="checkbox">
-              <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger2'][0]; ?>">
-            </div>
-          </div>
+      if($users_meta['angehoeriger2'][0]){ ?>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger2'][0]; ?>">
+            <?php echo $users_meta['angehoeriger2'][0]; ?>
+          </label>
+        </div>
+
+      <?php
+      }
+
+      if($users_meta['angehoeriger3'][0]){ ?>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger3'][0]; ?>">
+            <?php echo $users_meta['angehoeriger3'][0]; ?>
+          </label>
         </div>
       <?php
       }
 
-      if($users_meta['angehoeriger3'][0] !== ''){ ?>
-        <div class="form-group row">
-          <label class="col-sm-3"><?php echo $users_meta['angehoeriger3'][0]; ?></label>
-          <div class="col-sm-9">
-            <div class="checkbox">
-              <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger3'][0]; ?>">
-            </div>
-          </div>
+      if($users_meta['angehoeriger4'][0]){ ?>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger4'][0]; ?>">
+            <?php echo $users_meta['angehoeriger4'][0]; ?>
+          </label>
         </div>
       <?php
       }
-
-      if($users_meta['angehoeriger4'][0] !== ''){ ?>
-        <div class="form-group row">
-          <label class="col-sm-3"><?php echo $users_meta['angehoeriger4'][0]; ?></label>
-          <div class="col-sm-9">
-            <div class="checkbox">
-              <input type="checkbox" name="angehoerige[]" value="<?php echo $users_meta['angehoeriger4'][0]; ?>">
-            </div>
-          </div>
-        </div>
-      <?php
-      }
+      ?> </div>
+    <?php
     }
     ?>
  
@@ -93,16 +86,15 @@
     <fieldset>
         <input type="hidden" name="submitted" id="submitted" value="true" />
         <?php wp_nonce_field( 'post_nonce', 'post_nonce_field' ); ?>
-        <button type="submit" id="submitButton" class="btn"><?php _e('Add Post', 'framework') ?></button>
+        <button type="submit" id="submitButton" class="btn"><?php _e('Anmelden', 'stroller') ?></button>
     </fieldset>
 </form>
+
 <script type="text/javascript">
   jQuery('#submitButton').on('click', function(){
     var hochzeitEvent = {};
-
     hochzeitEvent.user = jQuery('h3#hello').data('name');
     hochzeitEvent.action = 'anmeldung';
-
     trackHochzeitEvent(hochzeitEvent);
   })
 </script>
