@@ -16,9 +16,10 @@
 // Form Validation
  
 if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_verify_nonce( $_POST['post_nonce_field'], 'post_nonce' ) ) {
+    if( isset( $_POST['abmeldung'] ) ){ $prefix = 'abmeldung'; }else{ $prefix = 'anmeldung'; }
 
     $post_information = array(
-        'post_title' => 'anmeldung' . '-' . wp_get_current_user()->user_firstname . '-' . wp_get_current_user()->user_lastname,
+        'post_title' => $prefix . '-' . wp_get_current_user()->user_firstname . '-' . wp_get_current_user()->user_lastname,
         'post_content' => $_POST['postContent'],
         'post_type' => 'anmeldung',
         'post_status' => 'pending'
@@ -104,14 +105,14 @@ if ( ! is_user_logged_in() ) { ?>
     
       while ( $my_query->have_posts() ) : $my_query->the_post();  ?>
 
-          <div class="jumbotron col-xs-12 featured-area">
+          <div class="jumbotron col-xs-12 featured-area text-xs-center">
             <h1 class="display-1"><?php the_title(); ?></h1>
             <p class="lead"><?php the_content(); ?></p>
             <hr class="m-y-md">
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-success text-xs-left">Ja</a>
-              <a href="#" class="btn btn-lg btn-danger  text-xs-right">Nein</a>
-            </p>
+            <div class="col-xs-6 col-xs-offset-3">
+              <a href="#hello" id="ja" class="btn btn-secondary-outline btn-block">Ja</a>
+              <a href="#hello" id="nein" class="btn btn-secondary-outline btn-block">Leider nein</a>
+            </div>
           </div>
       <?php 
       endwhile; 
@@ -122,14 +123,20 @@ if ( ! is_user_logged_in() ) { ?>
 
 </div>
 
-<div id="anmeldung">
+<div id="anmeldung" class="row">
+  <div class="col-xs-12 col-lg-8 col-lg-offset-2">
   <?php 
   if ( $post_id ) {
-    echo '<p>Danke für die Anmeldung</p>';
+    if( isset($_POST['abmeldung']) ){
+      echo '<div class="alert alert-danger"><p><strong>Schade.</strong> Trotzdem danke für deine Nachricht. Meld dich, falls du es dir anders überlegst.</p></div>';
+    }else{
+      echo '<div class="alert alert-success"><p><strong>Danke für die Anmeldung, wir freuen uns auf dich!</strong></p><p>Unter <a href="/anmeldung">"Anmeldung"</a> kannst du die Anmeldung ergänzen oder korrigieren.</p></div>';
+    }
   }else{
     get_template_part( 'create', 'anmeldung' ); 
   }
   ?>
+  </div>
 </div>
 
 
