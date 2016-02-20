@@ -1,9 +1,3 @@
-jQuery(document).ready(function() {
- 
-    jQuery("#createPostForm").validate();
- 
-});
-
 // Materialize Pushpin
 
 var guid = (function() {
@@ -83,6 +77,7 @@ var guid = (function() {
 
 
   jQuery(document).ready(function(){
-    jQuery('#mainnav').pushpin( { top: jQuery('#mainnav').offset().top } );
-
+    if(jQuery('#mainnav').length > 0){
+      jQuery('#mainnav').pushpin( { top: jQuery('#mainnav').offset().top } );
+    }
   });

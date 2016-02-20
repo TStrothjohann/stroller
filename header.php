@@ -17,6 +17,8 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+
+<link rel="icon" href="<?php echo get_template_directory_uri() . '/images/heart-outline.png'; ?>" type="image/png">
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 <?php wp_head(); ?>
 </head>
@@ -68,4 +70,31 @@
   <div class="row" id="top-img">
       <img width="100%"src="<?php echo get_template_directory_uri() . '/images/150507_nadja-thomas.jpg'; ?>">
   </div>
-  <?php } ?>
+  <?php } 
+  if( is_user_logged_in() ){ ?>
+    <div class="row m-b">
+    <?php 
+        $menu_name = 'primary';
+        if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+          $menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+          $menu_items = wp_get_nav_menu_items($menu->term_id);
+          $menu_list = '<nav id="mainnav" class="navbar navbar-full nav-inline" role="navigation"><div class="container"><ul>';
+
+          foreach ( (array) $menu_items as $key => $menu_item ) {
+              $title = $menu_item->title;
+              $url = $menu_item->url;
+              $menu_list .= '<li><a class="nav-link" href="' . $url . '">' . $title . '</a></li>';
+          }
+          $menu_list .= '<li><a class="nav-link" href="' . wp_logout_url( home_url() ) . '">Logout</a></li>';
+          $menu_list .= '</ul></div></nav>';
+        } else {
+          $menu_list = '<ul><li>Menu "' . $menu_name . '" not defined.</li></ul>';
+        }
+
+        echo $menu_list;
+    ?>
+    </div>
+  <?php 
+  }
+
+  ?>

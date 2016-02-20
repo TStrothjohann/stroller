@@ -74,27 +74,6 @@ if ( ! is_user_logged_in() ) { ?>
     </div>
   </div> 
 <?php } else { ?>
-<div class="row m-b">
-  <?php 
-      $menu_name = 'primary';
-		  if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
-				$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
-				$menu_items = wp_get_nav_menu_items($menu->term_id);
-				$menu_list = '<nav id="mainnav" class="navbar navbar-full nav-inline" role="navigation"><div class="container"><ul>';
-
-				foreach ( (array) $menu_items as $key => $menu_item ) {
-				    $title = $menu_item->title;
-				    $url = $menu_item->url;
-				    $menu_list .= '<li><a class="nav-link" href="' . $url . '">' . $title . '</a></li>';
-				}
-				$menu_list .= '</ul></div></nav>';
-		  } else {
-				$menu_list = '<ul><li>Menu "' . $menu_name . '" not defined.</li></ul>';
-		  }
-
-		  echo $menu_list;
-  ?>
-</div>
 
 
 <div class="row" id="wann-wo">
@@ -113,7 +92,7 @@ if ( ! is_user_logged_in() ) { ?>
               $anmeldung_id = get_the_author_meta( 'anmeldung_id', wp_get_current_user()->ID );
           if ( $anmeldung_id ) {
             
-            echo "Du hast Dich für unsere Hochzeit angemeldet. Willst Du deine <a href='/?page_id=58' alt='Anmeldung bearbeiten'>Anmeldung bearbeiten?</a>";
+            echo "Du hast Dich für unsere Hochzeit angemeldet. Willst Du deine <a href='/anmeldung' alt='Anmeldung bearbeiten'>Anmeldung bearbeiten?</a>";
 
           }else{ ?>
             <div class="col-xs-6 col-xs-offset-3">

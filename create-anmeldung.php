@@ -1,8 +1,9 @@
-<h3 id="hello" class="yes" style="display:none;" data-name="<?php echo wp_get_current_user()->user_login; ?>">Hallo <?php echo wp_get_current_user()->user_firstname; ?></h3>
+<h3 id="hello" class="yes" style="display:none;" data-name="<?php echo wp_get_current_user()->user_login; ?>">Hallo <?php echo wp_get_current_user()->user_firstname; ?>,</h3>
+<div class="yes lead" style="display:none;">Schön, dass Du mit uns feiern willst! Bitte fülle gleich die Anmeldung aus - Du kannst sie später über den Menüpunkt "Anmeldung" noch bearbeiten.</div>
 <h3 id="schade" class="no" style="display:none;">Sehr sehr schade, <?php echo wp_get_current_user()->user_firstname; ?>!</h3>
-<form action="" id="createPostForm" method="POST">
+<form action="" id="createPostForm" class="m-t" method="POST">
     <fieldset class="form-group yes" style="display:none;">
-        <label for="anmeldungAdresse"><?php _e('Adresse:', 'stroller') ?></label>
+        <label for="anmeldungAdresse"><?php _e('Gib uns bitte Deine Adresse:', 'stroller') ?></label>
         <input type="text" name="anmeldungAdresse" id="anmeldungAdresse" class="form-control" placeholder="z.B. Bötzowstraße 38, 10407 Berlin">
     </fieldset>
     <fieldset class="form-group yes" style="display:none;">
@@ -94,11 +95,14 @@
     jQuery('.yes').show();
     jQuery('.no').hide();
     jQuery('form#createPostForm').remove('input#abmeldung');
+    jQuery('body').scrollTo('#hello');
   })
   jQuery('#nein').on('click', function(){
+
     jQuery('.yes').hide();
     jQuery('.also-no').show();
     jQuery('.no').show();
     jQuery('form#createPostForm').append('<input type="hidden" name="abmeldung" id="abmeldung" value="abmeldung">')
+    jQuery('body').scrollTo('#schade');
   })
 </script>
