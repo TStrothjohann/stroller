@@ -109,10 +109,21 @@ if ( ! is_user_logged_in() ) { ?>
             <h1 class="display-1"><?php the_title(); ?></h1>
             <p class="lead"><?php the_content(); ?></p>
             <hr class="m-y-md">
+            <?php 
+              $anmeldung_id = get_the_author_meta( 'anmeldung_id', wp_get_current_user()->ID );
+          if ( $anmeldung_id ) {
+            
+            echo "Du hast Dich für unsere Hochzeit angemeldet. Willst Du deine <a href='/?page_id=58' alt='Anmeldung bearbeiten'>Anmeldung bearbeiten?</a>";
+
+          }else{ ?>
             <div class="col-xs-6 col-xs-offset-3">
               <a href="#hello" id="ja" class="btn btn-secondary-outline btn-block">Ja</a>
               <a href="#hello" id="nein" class="btn btn-secondary-outline btn-block">Leider nein</a>
             </div>
+          <?php
+          }
+          ?>
+
           </div>
       <?php 
       endwhile; 
