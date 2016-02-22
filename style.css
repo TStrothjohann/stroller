@@ -12,10 +12,19 @@ Tags:
 
 */
 
+body {
+    font-family: 'Special Elite', monospace;
+    color: #555555;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Amatic SC', sans-serif;
+}
 
 
 #logo .and {
-    font-family: 'Times New Roman', Times, serif;
+    /*font-family: 'Times New Roman', Times, serif;*/
+    font-family: 'Amatic SC', sans-serif;
     font-weight: 400;
     font-style: normal;
     color: #555555;
@@ -32,7 +41,7 @@ Tags:
 }
 
 h3.name {
-    font-family: Montserrat;
+    font-size: 50px;
     display: inline;
 }
 
@@ -64,7 +73,7 @@ form#loginform-index p {
 /* Menu */
 
 a.nav-link {
-    color: black;
+    color: #555555;
     text-transform: uppercase;
 }
 
@@ -72,8 +81,11 @@ nav.navbar li {
     margin-right: 1rem;
     display: inline-block;
     padding-right: 1rem;
+    padding-top: 0.5rem;
     border-right: 1px solid #eee;
 }
+
+
 
 nav.navbar ul {
     margin-bottom: 0;

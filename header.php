@@ -20,6 +20,7 @@
 
 <link rel="icon" href="<?php echo get_template_directory_uri() . '/images/heart-outline.png'; ?>" type="image/png">
 <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+<link href="http://fonts.googleapis.com/css?family=Amatic+SC:400,700|Special+Elite" rel="stylesheet" type="text/css">
 <?php wp_head(); ?>
 </head>
 

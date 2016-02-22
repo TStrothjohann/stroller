@@ -12,8 +12,6 @@ get_header();
 $users_meta = get_user_meta(wp_get_current_user()->ID); 
 $anmeldung_user_id = wp_get_current_user()->ID;
 $anmeldung_id = get_the_author_meta( 'anmeldung_id', $anmeldung_user_id );
-$anmeldung_daten = get_post_meta($anmeldung_id);
-$anmeldung = get_post($anmeldung_id);
 
 if($anmeldung_id){
   //Form validation
@@ -38,6 +36,9 @@ if($anmeldung_id){
 
 
   }
+
+$anmeldung_daten = get_post_meta($anmeldung_id);
+$anmeldung = get_post($anmeldung_id);
 //Form
 
   ?>
@@ -84,7 +85,41 @@ if($anmeldung_id){
 
         <?php
         
-        $users_meta = get_user_meta(wp_get_current_user()->ID); 
+        $users_meta = get_user_meta(wp_get_current_user()->ID);
+        if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger4'][0]) !== false ) {
+         $four_checked = 'checked';
+        }elseif(isset($_POST['angehoerige']) && in_array($users_meta['angehoeriger4'][0], $_POST['angehoerige'])){
+          $four_checked = 'checked';
+        }else{
+          $four_checked = '';
+        }
+
+
+        if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger3'][0]) !== false ) {
+         $three_checked = 'checked';
+        }elseif(isset($_POST['angehoerige']) && in_array($users_meta['angehoeriger3'][0], $_POST['angehoerige'])){
+          $three_checked = 'checked';
+        }else{
+          $three_checked = '';
+        }
+
+
+        if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger2'][0]) !== false ) {
+         $two_checked = 'checked';
+        }elseif(isset($_POST['angehoerige']) && in_array($users_meta['angehoeriger2'][0], $_POST['angehoerige'])){
+          $two_checked = 'checked';
+        }else{
+          $two_checked = '';
+        }
+
+
+        if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger1'][0]) !== false ) {
+         $one_checked = 'checked';
+        }elseif(isset($_POST['angehoerige']) && in_array($users_meta['angehoeriger1'][0], $_POST['angehoerige'])){
+          $one_checked = 'checked';
+        }else{
+          $one_checked = '';
+        }
 
         if ($users_meta['angehoeriger1']) { ?>
           <label for="checkbox-container">Bringst du deine Lieben mit?</label>
@@ -93,7 +128,7 @@ if($anmeldung_id){
             <label>
               <input type="checkbox" 
               <?php
-                if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger1'][0]) !== false) { echo 'checked'; }
+                echo $one_checked;
               ?>
                name="angehoerige[]" value="<?php echo $users_meta['angehoeriger1'][0]; ?>">
               <?php echo $users_meta['angehoeriger1'][0]; ?>
@@ -107,7 +142,7 @@ if($anmeldung_id){
               <label>
                 <input type="checkbox" 
                 <?php
-                  if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger2'][0]) !== false) { echo 'checked'; }
+                  echo $two_checked;
                 ?>
                 name="angehoerige[]" value="<?php echo $users_meta['angehoeriger2'][0]; ?>">
                 <?php echo $users_meta['angehoeriger2'][0]; ?>
@@ -122,27 +157,20 @@ if($anmeldung_id){
               <label>
                 <input type="checkbox"
                 <?php
-                  if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger3'][0]) !== false) { echo 'checked'; }
+                  echo $three_checked;
                 ?>
                 name="angehoerige[]" value="<?php echo $users_meta['angehoeriger3'][0]; ?>">
                 <?php echo $users_meta['angehoeriger3'][0]; ?>
               </label>
             </div>
           <?php
-          }
 
-if(isset($_POST['angehoerige'])){
-  $four_checked = in_array($users_meta['angehoeriger4'][0], $_POST['angehoerige']);
-}
 
           if($users_meta['angehoeriger4'][0]){ ?>
             <div class="checkbox">
               <label>
                 <input type="checkbox" 
-                <?php
-                  if (strpos($anmeldung_daten[angehoerige][0], $users_meta['angehoeriger4'][0]) !== false ) { echo 'checked'; }
-                  if (isset($_POST['angehoerige']) && in_array($users_meta['angehoeriger4'][0], $_POST['angehoerige'])) { echo 'checked'; }
-                ?>
+                <?php echo $four_checked; ?>
                 name="angehoerige[]" value="<?php echo $users_meta['angehoeriger4'][0]; ?>">
                 <?php echo $users_meta['angehoeriger4'][0]; ?>
               </label>
@@ -152,7 +180,7 @@ if(isset($_POST['angehoerige'])){
           ?> </div>
         <?php
         }
-        echo count($_POST['angehoerige']);
+
         if ( isset( $_POST['postContent'] ) ){ 
           $post_text = $_POST['postContent']; 
         }else{
@@ -168,7 +196,7 @@ if(isset($_POST['angehoerige'])){
         </fieldset>
 
         <?php if( $_POST['submitted'] ) : ?>
-          <div class="alert alert-success">Deine Anmeldung wurde aktualisiert. <a href="<?php echo get_home_url(); ?>">Zurück zur Homepage</a></div>
+          <div class="alert alert-success">Deine Anmeldung wurde aktualisiert. Evtl. musst Du die <a onclick="location.reload();">Seite einmal neu laden</a>. <a href="<?php echo get_home_url(); ?>">Zurück zur Homepage</a>.</div>
         <?php endif; ?>
      
         <fieldset>
@@ -185,4 +213,4 @@ if(isset($_POST['angehoerige'])){
       </footer><!-- .entry-footer -->
     </article><!-- #post-## -->
   </div>
-</div>
+</div> <?php } ?>
