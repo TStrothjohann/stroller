@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Gasthof Ohrnbachtal",
+    "url": "http://www.gasthof-ohrnbachtal.de/",
+    "description": "Direkt gegenüber der Scheune.",
+    "lat": 49.699993,
+    "lng": 9.1271456
+  },
+
+  {
+    "title": "Landgasthof Geiersmühle",
+    "url": "http://www.geiersmuehle.de/",
+    "description": "Etwa einen Kilometer von der Scheune entfernt.",
+    "lat": 49.7077,
+    "lng": 9.1203383
+  },
+  {
+    "title": "Hotel Weyrich",
+    "url": "",
+    "description": "Einfach.",
+    "lat": 49.7114099,
+    "lng": 9.0986129
+  },
+  {
+    "title": "Hotel Talblick",
+    "url": "http://hotel-talblick.de/",
+    "description": "Ca. 5 Minuten im Auto entfernt, wenn die Brücke wieder errichtet ist.",
+    "lat": 49.6973217,
+    "lng": 9.0926411
+  },
+  {
+    "title": "Parkhotel 1970",
+    "url": "http://www.parkhotel-1970.de/",
+    "description": "Das Parkhotel ist komplett im Stil der 70er Jahre eingerichtet.",
+    "lat": 49.71372,
+    "lng": 9.0938793
+  }
+]

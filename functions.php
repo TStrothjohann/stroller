@@ -105,6 +105,14 @@ function stroller_scripts() {
 	// custom jquery
 	wp_register_script( 'custom_js', get_template_directory_uri() . '/js/jquery.custom.js', array( 'jquery' ), '1.0', TRUE );
 	wp_enqueue_script( 'custom_js' );
+
+	//Google map
+	
+	wp_register_script( 'gmap-api_js', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHwAjG5waPEdLt4qM7NTvWsckOZR6A4EY', array( 'jquery' ), '1.0', FALSE );
+	wp_enqueue_script( 'gmap-api_js' );
+
+	wp_register_script( 'gmap_js', get_template_directory_uri() . '/js/gmap.js', array( 'jquery' ), '1.0', TRUE );
+	wp_enqueue_script( 'gmap_js' );
 	 
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
