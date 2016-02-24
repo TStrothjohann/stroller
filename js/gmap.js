@@ -1,15 +1,3 @@
-// function initMap() {
-//   var styleArray = [{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}]; 
-//   var map = new google.maps.Map(document.getElementById('map'), {
-//     center: {lat: 49.6994338, lng: 9.1276168},
-//     scrollwheel: false,
-//     // Apply the map style array to the map.
-//     styles: styleArray,
-//     zoom: 12
-//   });
-// }
-// initMap();
-
 var hotels = [
   {
     "title": "Forstscheune Ohrnbachtal",
@@ -45,8 +33,8 @@ var hotels = [
     "title": "Hotel Talblick",
     "url": "http://hotel-talblick.de/",
     "description": "Ca. 5 Minuten im Auto entfernt, wenn die Brücke wieder errichtet ist.",
-    "lat": 49.6973217,
-    "lng": 9.0926411
+    "lat": 49.7113391,
+    "lng": 9.10074
   },
   {
     "title": "Parkhotel 1970",

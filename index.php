@@ -37,6 +37,8 @@ if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_v
 
   add_post_meta($anmeldung_id, "anmeldung_adresse", wp_strip_all_tags($_POST['anmeldungAdresse']) );
   add_post_meta($anmeldung_id, "anmeldung_hotel", wp_strip_all_tags($_POST['anmeldungHotel']) );
+  add_post_meta($anmeldung_id, "anmeldung_anreise", wp_strip_all_tags($_POST['anmeldungAnreise']) );
+  add_post_meta($anmeldung_id, "anmeldung_musik", wp_strip_all_tags($_POST['anmeldungMusik']) );
   
   if ( is_array($_POST['angehoerige']) ){
     $angehoerige = implode(', ', $_POST['angehoerige']);
@@ -75,7 +77,7 @@ if ( ! is_user_logged_in() ) { ?>
   </div> 
 <?php } else { ?>
 
-
+<!-- Anmeldung -->
 <div class="row" id="wann-wo">
   <div class="col-lg-8 col-lg-offset-2">
     <?php 
@@ -86,6 +88,8 @@ if ( ! is_user_logged_in() ) { ?>
 
           <div class="jumbotron col-xs-12 featured-area text-xs-center">
             <h1 class="display-1"><?php the_title(); ?></h1>
+            <!-- Countdown -->
+            <div id="countdown"></div>
             <p class="lead"><?php the_content(); ?></p>
             <hr class="m-y-md">
             <?php 
@@ -95,7 +99,7 @@ if ( ! is_user_logged_in() ) { ?>
             echo "Du hast Dich für unsere Hochzeit angemeldet. Willst Du deine <a href='/anmeldung' alt='Anmeldung bearbeiten'>Anmeldung bearbeiten?</a>";
 
           }else{ ?>
-            <div class="col-xs-6 col-xs-offset-3">
+            <div class="col-xs-12 col-lg-offset-3 col-lg-6">
               <a href="#hello" id="ja" class="btn btn-secondary-outline btn-block">Ja</a>
               <a href="#hello" id="nein" class="btn btn-secondary-outline btn-block">Leider nein</a>
             </div>

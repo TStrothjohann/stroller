@@ -33,6 +33,8 @@ if($anmeldung_id){
   }
   
   update_post_meta($anmeldung_id, "angehoerige",  $angehoerige );
+  update_post_meta($anmeldung_id, "anmeldung_anreise", wp_strip_all_tags($_POST['anmeldungAnreise']) );
+  update_post_meta($anmeldung_id, "anmeldung_musik", wp_strip_all_tags($_POST['anmeldungMusik']) );
 
 
   }
@@ -70,17 +72,48 @@ $anmeldung = get_post($anmeldung_id);
             >Gasthof Ohrnbachtal</option>
             <option
               <?php
-                if (strpos($anmeldung_daten[anmeldung_hotel][0], 'Geiersmühle') !== false) { echo 'selected'; }
+                if (strpos($anmeldung_daten[anmeldung_hotel][0], 'Landgasthof Geiersmühle') !== false) { echo 'selected'; }
               ?>
-            >Geiersmühle</option>
+            >Landgasthof Geiersmühle</option>
             <option
               <?php
                 if (strpos($anmeldung_daten[anmeldung_hotel][0], 'Parkhotel 1970') !== false) { echo 'selected'; }
               ?>
             >Parkhotel 1970</option>
-            <option>Andere Unterbringung</option>
+            <option
+              <?php
+                if (strpos($anmeldung_daten[anmeldung_hotel][0], 'Hotel Talblick') !== false) { echo 'selected'; }
+              ?>
+            >Hotel Talblick</option>
+                        <option
+              <?php
+                if (strpos($anmeldung_daten[anmeldung_hotel][0], 'Hotel Weyrich') !== false) { echo 'selected'; }
+              ?>
+            >Hotel Weyrich</option>
+                        <option
+              <?php
+                if (strpos($anmeldung_daten[anmeldung_hotel][0], 'Andere Unterbringung') !== false) { echo 'selected'; }
+              ?>
+            >Andere Unterbringung</option>
           </select>
           <small class="text-muted">Wir haben unterschiedliche Zimmer in naheliegenden Hotels reserviert - <a href="/hotels">Infos zu den Hotels</a></small>
+        </fieldset>
+        <fieldset class="form-group">
+          <label for="anmeldungAnreise">Hast Du schon eine Hotelreservierung?</label>
+          <select class="form-control" id="anmeldungAnreise" name="anmeldungAnreise">
+            <option
+              <?php
+                if (strpos($anmeldung_daten[anmeldung_anreise][0], 'Am Freitag, 29.07') !== false) { echo 'selected'; }
+              ?>
+            >Am Freitag, 29.07
+            </option>
+            <option
+              <?php
+                if (strpos($anmeldung_daten[anmeldung_anreise][0], 'Am Samstag, 30.07') !== false) { echo 'selected'; }
+              ?>
+            >Am Samstag, 30.07
+            </option>
+          </select>
         </fieldset>
 
         <?php
@@ -188,7 +221,11 @@ $anmeldung = get_post($anmeldung_id);
         } 
 
         ?>
-        
+        <fieldset class="form-group">
+            <label for="anmeldungMusik"><?php _e('Zu welchem Lied versprichst Du, zu tanzen?', 'stroller') ?></label>
+            <input type="text" name="anmeldungMusik" id="anmeldungMusik" class="form-control">
+        </fieldset>
+
         <fieldset class="form-group">
             <label for="postContent"><?php _e('Willst Du uns sonst noch etwas mitteilen?', 'stroller') ?></label>
      

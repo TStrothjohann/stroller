@@ -11,11 +11,22 @@
       <select class="form-control" id="anmeldungHotel" name="anmeldungHotel">
         <option>Noch keine Reservierung</option>
         <option>Gasthof Ohrnbachtal</option>
-        <option>Geiersmühle</option>
+        <option>Landgasthof Geiersmühle</option>
         <option>Parkhotel 1970</option>
+        <option>Hotel Talblick</option>
+        <option>Hotel Weyrich</option>
         <option>Andere Unterbringung</option>
       </select>
       <small class="text-muted">Wir haben unterschiedliche Zimmer in naheliegenden Hotels reserviert - <a href="/hotels">Infos zu den Hotels</a></small>
+    </fieldset>
+
+    <fieldset class="form-group yes" style="display:none;">
+      <label for="anmeldungAnreise">Wann reist Du an?</label>
+      <select class="form-control" id="anmeldungAnreise" name="anmeldungAnreise">
+        <option>Am Freitag, 29.07</option>
+        <option>Am Samstag, 30.07</option>
+      </select>
+      <small class="text-muted">Wir Offiziell gehts am Samstag um 14.00 Uhr los, aber einen Umtrunk und vielleicht ein Lagerfeuer gibt's schon am Freitagabend. (<a href="/ablaufplan">Ablaufplan</a>)</small>
     </fieldset>
 
     <?php
@@ -68,7 +79,10 @@
     <?php
     }
     ?>
- 
+    <fieldset class="form-group yes" style="display:none;">
+        <label for="anmeldungMusik"><?php _e('Zu welchem Lied versprichst Du, zu tanzen?', 'stroller') ?></label>
+        <input type="text" name="anmeldungMusik" id="anmeldungMusik" class="form-control">
+    </fieldset>
     <fieldset class="form-group also-no yes" style="display:none;">
         <label for="postContent"><?php _e('Willst Du uns sonst noch etwas mitteilen?', 'stroller') ?></label>
  
