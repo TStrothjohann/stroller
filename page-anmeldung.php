@@ -252,3 +252,4 @@ $anmeldung = get_post($anmeldung_id);
     </article><!-- #post-## -->
   </div>
 </div>
+<?php get_footer(); ?>
