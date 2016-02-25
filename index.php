@@ -30,7 +30,7 @@ if ( isset( $_POST['submitted'] ) && isset( $_POST['post_nonce_field'] ) && wp_v
   
   // save anmeldung into user-profile
   
-    if ( current_user_can( 'edit_user', $anmeldung_user_id ) ){
+    if ( current_user_can( 'edit_user', $anmeldung_user_id && !$_POST['abmeldung']) ){
       update_usermeta( $anmeldung_user_id, 'anmeldung_id', $anmeldung_id );
     }
   

@@ -109,7 +109,12 @@
     jQuery('.yes').show();
     jQuery('.no').hide();
     jQuery('form#createPostForm').remove('input#abmeldung');
-    jQuery('body').scrollTo('#hello');
+    jQuery('html, body').animate({
+        scrollTop: jQuery("#hello").offset().top
+    }, 1400);
+    if(jQuery('input[name=abmeldung]')){
+      jQuery('input[name=abmeldung]').remove();
+    }
   })
   jQuery('#nein').on('click', function(){
 
@@ -117,6 +122,8 @@
     jQuery('.also-no').show();
     jQuery('.no').show();
     jQuery('form#createPostForm').append('<input type="hidden" name="abmeldung" id="abmeldung" value="abmeldung">')
-    jQuery('body').scrollTo('#schade');
+    jQuery('html, body').animate({
+        scrollTop: jQuery("#schade").offset().top
+    }, 1400);
   })
 </script>
