@@ -25,7 +25,7 @@ var hotels = [
   {
     "title": "Hotel Weyrich",
     "url": "https://www.google.de/maps/place/Hotel+Weyrich/@49.7114099,9.0964242,17z/data=!4m5!1m2!2m1!1sHotel+Weyrich!3m1!1s0x0000000000000000:0xabac3cf55c056855",
-    "description": "Einfach.",
+    "description": "Wir waren noch nicht da... Probiert es aus.",
     "lat": 49.7114099,
     "lng": 9.0986129
   },
@@ -90,7 +90,7 @@ function initializeMainMap(json) {
     var marker = new google.maps.Marker({position: latLng, map: map, title: title, description: description, url: hotelUrl, icon: icon});
     var infowindow = new google.maps.InfoWindow();
     google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent("<div class='infowindow'>" + this.title + ", " + "<br>" + this.description + "<br><a href='" + this.url + "'>Website</a></div>");
+      infowindow.setContent("<div class='infowindow'>" + this.title + ", " + "<br>" + this.description + "<br><a target='_blank' href='" + this.url + "'>Website</a></div>");
       infowindow.open(map, this);
     });
     markers.push(marker);

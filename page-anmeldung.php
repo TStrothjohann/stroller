@@ -8,6 +8,8 @@
  * @package stroller
  */
 
+if( ! is_user_logged_in() ){ wp_redirect(home_url()); exit; }
+
 get_header(); 
 
 $users_meta = get_user_meta(wp_get_current_user()->ID); 
@@ -32,7 +34,7 @@ if($anmeldung_id){
   
   update_post_meta($anmeldung_id, "angehoerige",  $angehoerige );
   update_post_meta($anmeldung_id, "anmeldung_anreise", wp_strip_all_tags($_POST['anmeldungAnreise']));
-  update_post_meta($anmeldung_id, "anmeldung_musik", wp_strip_all_tags($_POST['anmeldungMusik']));
+  add_post_meta($anmeldung_id, "anmeldung_musik", wp_strip_all_tags($_POST['anmeldungMusik']));
   }
 $anmeldung_daten = get_post_meta($anmeldung_id);
 $anmeldung = get_post($anmeldung_id);
@@ -244,9 +246,8 @@ $anmeldung = get_post($anmeldung_id);
         </fieldset>
       </form>
     <?php
-    }else{
-      wp_redirect( home_url() ); exit;
-    } ?>
+    }
+    ?>
       <footer class="entry-footer">
       </footer><!-- .entry-footer -->
     </article><!-- #post-## -->
