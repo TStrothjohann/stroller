@@ -26,7 +26,7 @@
         <option>Am Freitag, 29.07</option>
         <option>Am Samstag, 30.07</option>
       </select>
-      <small class="text-muted">Wir Offiziell gehts am Samstag um 14.00 Uhr los, aber einen Umtrunk und vielleicht ein Lagerfeuer gibt's schon am Freitagabend. (<a href="/ablaufplan">Ablaufplan</a>)</small>
+      <small class="text-muted">Offiziell gehts am Samstag um 14.00 Uhr los, aber einen Umtrunk und vielleicht ein Lagerfeuer gibt's schon am Freitagabend. (<a href="/ablaufplan">Ablaufplan</a>)</small>
     </fieldset>
 
     <?php

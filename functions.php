@@ -167,7 +167,7 @@ function register_anmeldung() {
 		'label'                 => __( 'Anmeldung', 'text_domain' ),
 		'description'           => __( 'Anmeldungen für die Hochzeit.', 'text_domain' ),
 		'labels'                => $labels,
-		'supports'              => array( 'title', 'author', 'custom-fields', ),
+		'supports'              => array( 'title', 'author', 'editor', 'custom-fields', ),
 		'hierarchical'          => false,
 		'public'                => true,
 		'show_ui'               => true,
