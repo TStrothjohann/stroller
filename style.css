@@ -122,3 +122,9 @@ nav.navbar {
     height: 100%;
     min-height: 400px;
 }
+
+/* Forum Adjustments */
+
+.bbp-reply-position-1 {
+    background-color: #b9b9a2;
+}

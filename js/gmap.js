@@ -42,6 +42,13 @@ var hotels = [
     "description": "Das Parkhotel ist komplett im Stil der 70er Jahre eingerichtet.",
     "lat": 49.71372,
     "lng": 9.0938793
+  },
+  {
+    "title": "Refektorium",
+    "url": "http://www.fuerst-leiningen.de/de/_sehenswert_benediktinerabtei_refektorium.html",
+    "description": "Die standesamtliche Trauung findet im Refektorium statt.",
+    "lat": 49.643317,
+    "lng": 9.220427
   }
 ];
 
@@ -65,9 +72,9 @@ function initializeMainMap(json) {
     zoom: 12,
     center: {lat: 49.6994338, lng: 9.1276168},
     panControl: false,
-    mapTypeControl: false,
-    streetViewControl: false,
-    overviewMapControl: false,
+    mapTypeControl: true,
+    streetViewControl: true,
+    overviewMapControl: true,
     scrollwheel: false,
     styles: mapStyles
   };
@@ -98,7 +105,7 @@ function initializeMainMap(json) {
 }
 
 
-jQuery('.hotelname').on('click', function(){
+jQuery('.location').on('click', function(){
   var title = jQuery(this).text();
   for (var i = 0; i < markers.length; i++) {
     if(markers[i].title === title){
