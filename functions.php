@@ -43,6 +43,23 @@ function stroller_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
+	
+	add_image_size( "gallery-thumb", 300, 400, false );
+
+	function new_gallery_atts( $out, $pairs, $atts ) {
+    $atts = shortcode_atts( array(
+      'columns' => '4',
+      'size' => 'gallery-thumb',
+    ), $atts );
+ 
+    $out['columns'] = $atts['columns'];
+    $out['size'] = $atts['size'];
+ 
+    return $out;
+ 
+	}
+	add_filter( 'shortcode_atts_gallery', 'new_gallery_atts', 10, 3 );
+
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'primary' => esc_html__( 'Primary Menu', 'stroller' ),
@@ -102,7 +119,11 @@ function stroller_scripts() {
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.css' );
 	wp_enqueue_style( 'stroller-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.js', array( 'jquery' ), '20151106', true );
+	wp_enqueue_script( 'masonry', get_template_directory_uri() . '/js/masonry.pkgd.min.js', array( 'jquery' ), '20161204', true );
+	wp_enqueue_script( 'images-loaded', get_template_directory_uri() . '/js/imagesloaded.pkgd.min.js', array( 'jquery' ), '20161204', true );
 	
+	wp_enqueue_script( 'showroom', get_template_directory_uri() . '/js/showroom.js', array( 'jquery' ), '20161204', true );
+
 	// custom jquery
 	wp_register_script( 'custom_js', get_template_directory_uri() . '/js/jquery.custom.js', array( 'jquery' ), '1.0', TRUE );
 	wp_enqueue_script( 'custom_js' );
